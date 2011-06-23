@@ -15,15 +15,14 @@
 
 (define (fast-mult x y)
   (define (even? num)
-    (= (remainder num 2) 0))
+    	  (= (remainder num 2) 0))
   (define (double num)
-    (* num 2))
-  (define (half num)
-    (/ num 2))
-  (define (fast-mult-log num1 num2 inv)
-    (cond ((= num2 1) inv)
-          ((even? num2) (fast-mult-log num1 (half num2) (+ (double num1) inv)))
-          (else (fast-mult-log num1 (- num2 1) (+ num1 inv)))))
-  (fast-mult-log x y 0))
-
-;This is wrong, obviously.  Will work it out on paper later...
+    	  (* num 2))
+  (define (halve num)
+  	  (/ x num))
+  (cond ((= b 0) 0)
+  	((= b 1) b)
+	((= b 2) (double a))
+	(else (if
+	      (even? b) (+ (double a) (fast-mult-rec a (halve b)))
+	      (+ a (fast-mult-rec a (- b 1)))))))
