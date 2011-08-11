@@ -1,0 +1,40 @@
+;Exercise 2.30.  Define a procedure square-tree analogous to the square-list procedure of exercise 2.21. That is, square-list should behave as follows:
+
+;(square-tree
+; (list 1
+;       (list 2 (list 3 4) 5)
+;       (list 6 7)))
+;(1 (4 (9 16) 25) (36 49))
+
+;Define square-tree both directly (i.e., without using any higher-order procedures) and also by using map and recursion.
+
+;Messy, direct version
+(define (messy-square-tree tree)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree tree))
+        (else
+         (cons
+          (messy-square-tree (car tree))
+          (messy-square-tree (cdr tree))))))
+
+;Cleaner version
+
+;renamed to make code more readable...
+(define left-branch car)
+(define right-branch cdr)
+(define tree? pair?)
+(define create-tree cons)
+
+;creating a function that maps across the entire tree
+(define (map-tree func tree)
+  (cond ((null? tree) nil)
+        ((not (tree? tree)) (func tree))
+        (else
+         (create-tree
+          (map-tree func (left-branch tree))
+          (map-tree func (right-branch tree))))))
+
+(define (square-tree tree)
+  (map-tree (lambda (x) (* x x)) tree))
+
+(define testlist (list 1 (list 2 (list 3 4) 5) (list 6 7)))
