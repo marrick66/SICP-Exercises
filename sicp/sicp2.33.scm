@@ -8,3 +8,6 @@
 
 (define (length sequence)
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+
+(length (list 1 2 3 4 5))
