@@ -7,7 +7,7 @@
 ;Exercise 3.17.  Devise a correct version of the count-pairs procedure of exercise 3.16 that returns the number of distinct pairs in any structure. (Hint: Traverse the structure, maintaining an auxiliary data structure that is used to keep track of which pairs have already been counted.)
 
 (define (count-pairs x)
-  (let ((existing-pairs '()))
+  (define existing-pairs '())
   (define (append-existing! item)
     (if (null? existing-pairs)
         (set! existing-pairs (list item))
@@ -22,7 +22,7 @@
                  (count-distinct (cdr x))
                  1))
             0)))
-  (count-distinct x)))
+  (count-distinct x))
 
 (define pair1 (cons 'a 'b))
 (define pair2 (cons 'c 'd))
@@ -31,7 +31,6 @@
 (set-car! pair1 pair2)
 (set-cdr! pair1 pair3)
 (set-car! pair2 pair3)
-(set-cdr! pair2 pair3)
 
 (count-pairs pair1)
 
